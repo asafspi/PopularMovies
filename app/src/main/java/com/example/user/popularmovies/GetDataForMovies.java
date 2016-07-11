@@ -26,10 +26,11 @@ public class GetDataForMovies {
     public static ArrayList<Movie> popularMovie = new ArrayList<>();
 
     public static void getDataFromServer(String popularOrTopRated) {
+        String apiKey = "YOUR API KEY"; //TODO change to you api key
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        String stringUrl = "http://api.themoviedb.org/3/movie/" + popularOrTopRated + "?api_key=1a8de05b42e33ad9bf8733b11cd5529d";
+        String stringUrl = "http://api.themoviedb.org/3/movie/" + popularOrTopRated + "?api_key=" + apiKey;
         //String stringUrl = "http://m.softgames.de/categories/latest-games.json/?p=belmedia_belauncher";
         StringBuilder url = new StringBuilder(stringUrl);
         HttpURLConnection connection = null;
