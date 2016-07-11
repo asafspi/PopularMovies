@@ -1,13 +1,16 @@
 package com.example.user.popularmovies;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -21,16 +24,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView gameLabel;
-        public ImageView gameImage;
-        public RelativeLayout playButton;
+
         public ImageView movieImage;
         public TextView movieLabel;
+        public RelativeLayout mainRelativeLayout;
 
         public ViewHolder(View v) {
             super(v);
             movieLabel = (TextView) v.findViewById(R.id.cell_label);
             movieImage = (ImageView) v.findViewById(R.id.cell_image);
+            mainRelativeLayout = (RelativeLayout) v.findViewById(R.id.cell_main);
         }
     }
 
@@ -54,6 +57,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 holder.movieLabel.setText(moviesList.get(position).getTitle());
                 Picasso.with(holder.movieImage.getContext()).load(moviesList.get(position).getPath())
                         .into(holder.movieImage);
+                holder.mainRelativeLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d("zaq", moviesList.get(position).getTitle());
+                        Intent intent = new Intent(holder.movieLabel.getContext(), MovieActivity.class);
+                        intent.putExtra("moviePosition", position);
+                        holder.movieLabel.getContext().startActivity(intent);
+                    }
+                });
     }
 
     @Override

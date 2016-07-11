@@ -25,11 +25,11 @@ public class GetDataForMovies {
 
     public static ArrayList<Movie> popularMovie = new ArrayList<>();
 
-    public static void getDataForOnlineGames(final Context context) {
+    public static void getDataFromServer(String popularOrTopRated) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        String stringUrl = "http://api.themoviedb.org/3/movie/popular?api_key=1a8de05b42e33ad9bf8733b11cd5529d";
+        String stringUrl = "http://api.themoviedb.org/3/movie/" + popularOrTopRated + "?api_key=1a8de05b42e33ad9bf8733b11cd5529d";
         //String stringUrl = "http://m.softgames.de/categories/latest-games.json/?p=belmedia_belauncher";
         StringBuilder url = new StringBuilder(stringUrl);
         HttpURLConnection connection = null;
@@ -49,7 +49,8 @@ public class GetDataForMovies {
                 String path = jsonObjectOffer.getString("poster_path");
                 String rating = jsonObjectOffer.getString("vote_average");
                 String releaseDate = jsonObjectOffer.getString("release_date");
-                popularMovie.add(i, new Movie(title, "http://image.tmdb.org/t/p/w92" + path, rating, releaseDate));
+                String overview = jsonObjectOffer.getString("overview");
+                popularMovie.add(i, new Movie(title, "http://image.tmdb.org/t/p/w154" + path, rating, releaseDate, overview));
                 Log.d("ZAQ", popularMovie.get(i).getTitle());
             }
         } catch (IOException | JSONException e) {
