@@ -31,7 +31,6 @@ public class GetDataForMovies {
         StrictMode.setThreadPolicy(policy);
 
         String stringUrl = "http://api.themoviedb.org/3/movie/" + popularOrTopRated + "?api_key=" + apiKey;
-        //String stringUrl = "http://m.softgames.de/categories/latest-games.json/?p=belmedia_belauncher";
         StringBuilder url = new StringBuilder(stringUrl);
         HttpURLConnection connection = null;
         InputStream in = null;
