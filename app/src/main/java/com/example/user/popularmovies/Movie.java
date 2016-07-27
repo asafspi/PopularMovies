@@ -4,13 +4,16 @@ package com.example.user.popularmovies;
 public class Movie {
 
     private String title, path, rating, releaseDate, overview;
+    private boolean isFavorite;
 
-    public Movie(String title, String path, String rating, String releaseDate, String overview) {
+    public Movie(String title, String path, String rating, String releaseDate, String overview, boolean isFavorite) {
         this.title = title;
         this.path = path;
         this.rating = rating;
         this.releaseDate = releaseDate;
         this.overview = overview;
+        this.isFavorite = isFavorite;
+
     }
 
     public String getOverview() {
@@ -52,5 +55,14 @@ public class Movie {
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
 }
 

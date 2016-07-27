@@ -24,9 +24,10 @@ import java.util.ArrayList;
 public class GetDataForMovies {
 
     public static ArrayList<Movie> popularMovie = new ArrayList<>();
+    public static ArrayList<Movie> favorites = new ArrayList<>();
 
     public static void getDataFromServer(String popularOrTopRated) {
-        String apiKey = "PUT YOUR API KEY"; //TODO change to your api key
+        String apiKey = "1a8de05b42e33ad9bf8733b11cd5529d"; //TODO change to your api key
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -50,7 +51,7 @@ public class GetDataForMovies {
                 String rating = jsonObjectOffer.getString("vote_average");
                 String releaseDate = jsonObjectOffer.getString("release_date");
                 String overview = jsonObjectOffer.getString("overview");
-                popularMovie.add(i, new Movie(title, "http://image.tmdb.org/t/p/w154" + path, rating, releaseDate, overview));
+                popularMovie.add(i, new Movie(title, "http://image.tmdb.org/t/p/w154" + path, rating, releaseDate, overview, false));
                 Log.d("ZAQ", popularMovie.get(i).getTitle());
             }
         } catch (IOException | JSONException e) {

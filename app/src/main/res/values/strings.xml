@@ -6,4 +6,7 @@
     <string name="release_date">Release Date:</string>
     <string name="plot">Plot:</string>
     <string name="rating">Rating:</string>
+    <string name="favorites">Favorites</string>
+    <string name="JSonOnLineGames">jsonFavoritesMovies</string>
+
 </resources>
