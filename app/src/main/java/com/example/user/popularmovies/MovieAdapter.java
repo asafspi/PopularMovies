@@ -42,7 +42,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             movieLabel = (TextView) v.findViewById(R.id.cell_label);
             movieImage = (ImageView) v.findViewById(R.id.cell_image);
             mainRelativeLayout = (RelativeLayout) v.findViewById(R.id.cell_main);
-            favoritesButton = (ImageView) v.findViewById(R.id.favoritesButton);
         }
     }
 

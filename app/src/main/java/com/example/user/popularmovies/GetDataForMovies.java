@@ -27,7 +27,7 @@ public class GetDataForMovies {
     public static ArrayList<Movie> favorites = new ArrayList<>();
 
     public static void getDataFromServer(String popularOrTopRated) {
-        String apiKey = "1a8de05b42e33ad9bf8733b11cd5529d"; //TODO change to your api key
+        String apiKey = ""; //TODO change to your api key
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 

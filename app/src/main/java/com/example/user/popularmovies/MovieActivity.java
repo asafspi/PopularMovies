@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.user.popularmovies.helpers.ShPref;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 public class MovieActivity extends AppCompatActivity implements View.OnClickListener {
@@ -20,6 +22,7 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
 //        release date
     private int position;
     private ImageView favorite;
+    TextView header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +31,15 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
         Intent intent = getIntent();
         position = intent.getIntExtra("moviePosition", 0);
         setVies();
-
-
     }
 
     private void setVies() {
-        TextView header = (TextView)findViewById(R.id.header_text);
-        TextView overview = (TextView)findViewById(R.id.textView_overview);
-        TextView rating = (TextView)findViewById(R.id.textViewRating);
-        TextView release = (TextView)findViewById(R.id.textViewRelease);
-        favorite = (ImageView) findViewById(R.id.favoritesButton);
+        header = (TextView) findViewById(R.id.header_text);
+        TextView overview = (TextView) findViewById(R.id.textView_overview);
+        TextView rating = (TextView) findViewById(R.id.textViewRating);
+        TextView release = (TextView) findViewById(R.id.textViewRelease);
+        favorite = (ImageView) findViewById(R.id.favoriteButton);
+        favorite.setOnClickListener(this);
         //getActionBar().setTitle(GetDataForMovies.popularMovie.get(position).getTitle());
         ImageView poster = (ImageView) findViewById(R.id.imageViewMovieActivity);
         header.setText(GetDataForMovies.popularMovie.get(position).getTitle());
@@ -50,10 +52,26 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.favoriteButton:
-                Log.d("resource ", view.getResources().toString());
+                Log.d("zaq", "Favorite button");
+                //ShPref.remove1(header.getText().toString());
+
+
+
+
+
+//                json = ShPref.getString(header.getText().toString(), "");
+//                Movie obj = gson.fromJson(json, Movie.class);
+//                Log.d("zaq from prefs === ", obj.getTitle());
+
                 break;
         }
+    }
+
+    private void addToFavorites(){
+        Gson gson = new Gson();
+        String json = gson.toJson(GetDataForMovies.popularMovie.get(position));
+        ShPref.put(header.getText().toString(), json);
     }
 }
