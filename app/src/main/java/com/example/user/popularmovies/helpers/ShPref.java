@@ -8,7 +8,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.user.popularmovies.GetDataForMovies;
 import com.example.user.popularmovies.Movie;
+import com.google.gson.Gson;
 
 public class ShPref {
 
@@ -108,21 +110,16 @@ public class ShPref {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         prefs.edit().remove(key).commit();
     }
-    public static void remove1(String title) {
-        Context ctx = Contextor.getInstance().getContext();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        //Log.d("zaq alll ---- ", prefs.getAll().get(Movie.class).toString());
-        if(prefs.contains(title)){
-            Toast.makeText(ctx, "Favorite", Toast.LENGTH_SHORT).show();
-        }
+
+    public static void saveToFavorites(String title, int position) {
+            Gson gson = new Gson();
+            String json = gson.toJson(GetDataForMovies.popularMovie.get(position));
+            ShPref.put(title , json);
     }
-    public static void addToFavorites(String title) {
+    public static boolean checkIfOnFavorites(String title) {
         Context ctx = Contextor.getInstance().getContext();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        //Log.d("zaq alll ---- ", prefs.getAll().get(Movie.class).toString());
-        if(prefs.contains(title)){
-            Toast.makeText(ctx, "Favorite", Toast.LENGTH_SHORT).show();
-        }
+        return prefs.contains(title);
     }
 
 }
