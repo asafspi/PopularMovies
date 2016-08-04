@@ -54,7 +54,13 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.favoriteButton:
                 Log.d("zaq", "Favorite button");
-                ShPref.saveToFavorites(header.getText().toString(), position);
+                if(ShPref.checkIfOnFavorites(header.getText().toString())){
+                    favorite.setImageResource(R.drawable.ic_star_empty);
+                    ShPref.remove(header.getText().toString());
+                }else {
+                    ShPref.saveToFavorites(header.getText().toString(), position);
+                    favorite.setImageResource(R.drawable.ic_star);
+                }
                 break;
         }
     }
