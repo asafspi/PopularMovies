@@ -9,11 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.user.popularmovies.helpers.FavoritesActivity;
+import com.example.user.popularmovies.helpers.ShPref;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,8 +31,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        checkIfFavoritesExist();
         GetDataForMovies.getDataFromServer(POPULAR);
         setView();
+    }
+
+    private void checkIfFavoritesExist() {
     }
 
     public void setView() {
@@ -39,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
         mainRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         gamesAdapter = new MovieAdapter(GetDataForMovies.popularMovie, getApplicationContext());
         mainRecyclerView.setAdapter(gamesAdapter);
+        Button buttonFavorites = (Button)findViewById(R.id.buttonMainFavorites);
+        buttonFavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
+            }
+        });
     }
 
     @Override
