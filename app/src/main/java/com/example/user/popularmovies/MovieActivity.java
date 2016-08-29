@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 import com.example.user.popularmovies.helpers.ShPref;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
 public class MovieActivity extends AppCompatActivity implements View.OnClickListener {
 
     private int position;
+    private boolean isCameFromFavorites;
     private ImageView favorite;
     TextView header;
 
@@ -24,10 +26,11 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_movie);
         Intent intent = getIntent();
         position = intent.getIntExtra("moviePosition", 0);
+        isCameFromFavorites = intent.getBooleanExtra("isFavorite", false);
         setVies();
-        if(ShPref.checkIfOnFavorites(header.getText().toString())){
+        if (ShPref.checkIfOnFavorites(header.getText().toString())) {
             favorite.setImageResource(R.drawable.ic_star);
-        }else {
+        } else {
             favorite.setImageResource(R.drawable.ic_star_empty);
         }
     }
@@ -39,25 +42,34 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
         TextView release = (TextView) findViewById(R.id.textViewRelease);
         favorite = (ImageView) findViewById(R.id.favoriteButton);
         favorite.setOnClickListener(this);
-        //getActionBar().setTitle(GetDataForMovies.popularMovie.get(position).getTitle());
         ImageView poster = (ImageView) findViewById(R.id.imageViewMovieActivity);
-        header.setText(GetDataForMovies.popularMovie.get(position).getTitle());
-        release.setText(GetDataForMovies.popularMovie.get(position).getReleaseDate());
-        overview.setText(GetDataForMovies.popularMovie.get(position).getOverview());
-        rating.setText(GetDataForMovies.popularMovie.get(position).getRating());
-        Picasso.with(getApplicationContext()).load(GetDataForMovies.popularMovie.get(position).getPath())
-                .into(poster);
+
+        if (isCameFromFavorites) {
+            header.setText(GetDataForMovies.favorites.get(position).getTitle());
+            release.setText(GetDataForMovies.favorites.get(position).getReleaseDate());
+            overview.setText(GetDataForMovies.favorites.get(position).getOverview());
+            rating.setText(GetDataForMovies.favorites.get(position).getRating());
+            Picasso.with(getApplicationContext()).load(GetDataForMovies.favorites.get(position).getPath())
+                    .into(poster);
+        } else {
+            header.setText(GetDataForMovies.popularMovie.get(position).getTitle());
+            release.setText(GetDataForMovies.popularMovie.get(position).getReleaseDate());
+            overview.setText(GetDataForMovies.popularMovie.get(position).getOverview());
+            rating.setText(GetDataForMovies.popularMovie.get(position).getRating());
+            Picasso.with(getApplicationContext()).load(GetDataForMovies.popularMovie.get(position).getPath())
+                    .into(poster);
+        }
+
     }
 
     @Override
     public void onClick(View view) {
+        Gson gson = new GsonBuilder().create();
         switch (view.getId()) {
             case R.id.favoriteButton:
-                Log.d("zaq", "Favorite button");
-                if(ShPref.checkIfOnFavorites(header.getText().toString())){
+                if (ShPref.checkIfOnFavorites(header.getText().toString())) {
                     favorite.setImageResource(R.drawable.ic_star_empty);
-                    ShPref.remove(header.getText().toString());
-                }else {
+                } else {
                     ShPref.saveToFavorites(header.getText().toString(), position);
                     favorite.setImageResource(R.drawable.ic_star);
                 }

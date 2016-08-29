@@ -6,17 +6,12 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.user.popularmovies.GetDataForMovies;
 import com.example.user.popularmovies.Movie;
 import com.example.user.popularmovies.R;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Map;
+import com.google.gson.GsonBuilder;
 
 public class ShPref {
 
@@ -118,26 +113,24 @@ public class ShPref {
     }
 
     public static void saveToFavorites(String title, int position) {
-            Gson gson = new Gson();
-            String json = gson.toJson(GetDataForMovies.popularMovie.get(position));
-            ShPref.put("favoritesJson" , json);
-    }
-    public static boolean checkIfOnFavorites(String title) {
-        Context ctx = Contextor.getInstance().getContext();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        return prefs.contains(title);
-    }
-    public static void checkIfFavoriteExist() {
-        Context ctx = Contextor.getInstance().getContext();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         Gson gson = new Gson();
-        String array = prefs.getString("favoritesJson", null);
-        Type type = new TypeToken<ArrayList<Movie>>() {
-        }.getType();
-        if (array != null) {
-            GetDataForMovies.favorites = gson.fromJson(array, type);
-            //Log.d("zaq1", GetDataForMovies.favorites.toString());
-        }
+        String json = gson.toJson(GetDataForMovies.popularMovie.get(position));
+        ShPref.put(title, json);
+        GetDataForMovies.favorites.add(GetDataForMovies.popularMovie.get(position));
+        String favoritesArray = gson.toJson(GetDataForMovies.favorites);
+        ShPref.put(R.string.JSonFavoritesMovies, favoritesArray);
+    }
+    public static void removeFromFavorites(String title, int position) {
+       for (int i = 0; i < GetDataForMovies.favorites.size(); i++ ){
+           if (GetDataForMovies.favorites.get(i).getTitle().equals(title)){
+
+           }
+       }
+    }
+
+    public static boolean checkIfOnFavorites(String title) {
+        String json = ShPref.getString(title, "");
+        return !json.equals("");
     }
 
 }

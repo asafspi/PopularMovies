@@ -32,5 +32,5 @@
         android:text="@string/favorites"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonMainFavorites" />
+        android:id="@+id/buttonFavorites" />
 </android.support.design.widget.CoordinatorLayout>
