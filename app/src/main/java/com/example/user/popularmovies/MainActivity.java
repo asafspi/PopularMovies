@@ -115,17 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.buttonFavorites:
-                //startActivity(new Intent(this, FavoritesActivity.class));
-                String url = "http:\\/\\/www.youtubeinmp3.com\\/download\\/get\\/?i=EFgaYJWQQkdzxORK2xq6w4w6Rq066PLE8fG1L2OXGP4PUuwIkopIKXLjKEFfiAJswGqTV11u3Uzd%2FLO95GeXDg%3D%3D";
-                WebView webView = (WebView)findViewById(R.id.webView);
-                webView.getSettings().setDomStorageEnabled(true);
-                webView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
-                webView.getSettings().setAppCacheEnabled(true);
-                webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-                webView.getSettings().setAllowFileAccess(true);
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
-                webView.loadUrl(url);
+                startActivity(new Intent(this, FavoritesActivity.class));
         }
     }
 }

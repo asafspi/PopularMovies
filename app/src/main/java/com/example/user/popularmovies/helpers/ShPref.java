@@ -121,11 +121,7 @@ public class ShPref {
         ShPref.put(R.string.JSonFavoritesMovies, favoritesArray);
     }
     public static void removeFromFavorites(String title, int position) {
-       for (int i = 0; i < GetDataForMovies.favorites.size(); i++ ){
-           if (GetDataForMovies.favorites.get(i).getTitle().equals(title)){
-
-           }
-       }
+        ShPref.remove(title);
     }
 
     public static boolean checkIfOnFavorites(String title) {
