@@ -8,5 +8,7 @@
     <string name="rating">Rating:</string>
     <string name="favorites">Favorites</string>
     <string name="JSonFavoritesMovies">jsonFavoritesMovies</string>
+    <string name="push_here_to_watch_a_trailer">Push here to watch a trailer</string>
+    <string name="push_here_to_read_review">Push here to read review</string>
 
 </resources>

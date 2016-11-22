@@ -1,4 +1,4 @@
-package com.example.user.popularmovies.helpers;
+package com.test.popularmovies.helpers;
 
 import android.content.Context;
 import android.util.Log;

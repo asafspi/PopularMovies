@@ -1,14 +1,15 @@
-package com.example.user.popularmovies;
+package com.test.popularmovies;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.user.popularmovies.helpers.ShPref;
+import com.test.user.popularmovies.R;
+import com.test.popularmovies.helpers.ShPref;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
@@ -18,7 +19,8 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
     private int position;
     private boolean isCameFromFavorites;
     private ImageView favorite;
-    TextView header;
+    private TextView header;
+    private String youTubeId, reviewUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
         } else {
             favorite.setImageResource(R.drawable.ic_star_empty);
         }
+        youTubeId = GetDataForMovies.popularMovie.get(position).getYouTubeId();
+        reviewUrl = GetDataForMovies.popularMovie.get(position).getReviewUrl();
     }
 
     private void setVies() {
@@ -40,6 +44,10 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
         TextView overview = (TextView) findViewById(R.id.textView_overview);
         TextView rating = (TextView) findViewById(R.id.textViewRating);
         TextView release = (TextView) findViewById(R.id.textViewRelease);
+        TextView trailerTextView = (TextView) findViewById(R.id.trailerTextView);
+        trailerTextView.setOnClickListener(this);
+        TextView reviewTextView = (TextView) findViewById(R.id.reviewTextView);
+        reviewTextView.setOnClickListener(this);
         favorite = (ImageView) findViewById(R.id.favoriteButton);
         favorite.setOnClickListener(this);
         ImageView poster = (ImageView) findViewById(R.id.imageViewMovieActivity);
@@ -75,6 +83,13 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
                     ShPref.saveToFavorites(header.getText().toString(), position);
                     favorite.setImageResource(R.drawable.ic_star);
                 }
+                break;
+            case R.id.trailerTextView:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + youTubeId)));
+                break;
+            case R.id.reviewTextView:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(reviewUrl)));
+
                 break;
         }
     }

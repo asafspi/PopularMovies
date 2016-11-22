@@ -1,4 +1,4 @@
-package com.example.user.popularmovies.helpers;
+package com.test.popularmovies.helpers;
 
 
 import android.content.Context;
@@ -7,11 +7,9 @@ import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.example.user.popularmovies.GetDataForMovies;
-import com.example.user.popularmovies.Movie;
-import com.example.user.popularmovies.R;
+import com.test.popularmovies.GetDataForMovies;
+import com.test.user.popularmovies.R;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public class ShPref {
 

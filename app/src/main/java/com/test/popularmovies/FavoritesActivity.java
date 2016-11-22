@@ -1,11 +1,11 @@
-package com.example.user.popularmovies;
+package com.test.popularmovies;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.user.popularmovies.R;
+import com.test.user.popularmovies.R;
 
 public class FavoritesActivity extends AppCompatActivity {
 

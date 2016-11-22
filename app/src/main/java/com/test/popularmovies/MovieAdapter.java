@@ -1,4 +1,4 @@
-package com.example.user.popularmovies;
+package com.test.popularmovies;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,10 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.test.user.popularmovies.R;
 
 import java.util.ArrayList;
 
-public class FavoritesAdapter  extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
+
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
     private final ArrayList<Movie> moviesList;
     private Context mContext;
     SharedPreferences prefs;
@@ -39,23 +41,23 @@ public class FavoritesAdapter  extends RecyclerView.Adapter<FavoritesAdapter.Vie
         }
     }
 
-    public FavoritesAdapter(ArrayList<Movie> movies, Context context) {
+    public MovieAdapter(ArrayList<Movie> movies, Context context) {
         this.moviesList = movies;
         this.mContext = context;
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     @Override
-    public FavoritesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+    public MovieAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                       int viewType) {
         View v1 = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.movie_cell, parent, false);
-        return new FavoritesAdapter.ViewHolder(v1);
+        return new ViewHolder(v1);
     }
 
 
     @Override
-    public void onBindViewHolder(final FavoritesAdapter.ViewHolder holder, int p) {
+    public void onBindViewHolder(final ViewHolder holder, int p) {
         final int position = holder.getAdapterPosition();
         holder.movieLabel.setText(moviesList.get(position).getTitle());
         Picasso.with(holder.movieImage.getContext()).load(moviesList.get(position).getPath())
@@ -66,7 +68,6 @@ public class FavoritesAdapter  extends RecyclerView.Adapter<FavoritesAdapter.Vie
                 Log.d("zaq", moviesList.get(position).getTitle());
                 Intent intent = new Intent(holder.movieLabel.getContext(), MovieActivity.class);
                 intent.putExtra("moviePosition", position);
-                intent.putExtra("isFavorite", true);
                 holder.movieLabel.getContext().startActivity(intent);
             }
         });

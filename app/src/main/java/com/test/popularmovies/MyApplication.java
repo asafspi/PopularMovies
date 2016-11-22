@@ -1,8 +1,8 @@
-package com.example.user.popularmovies;
+package com.test.popularmovies;
 
 import android.app.Application;
 
-import com.example.user.popularmovies.helpers.Contextor;
+import com.test.popularmovies.helpers.Contextor;
 
 public class MyApplication extends Application {
     @Override

@@ -1,4 +1,4 @@
-package com.example.user.popularmovies;
+package com.test.popularmovies;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,20 +9,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
+import com.test.user.popularmovies.R;
 
 import java.util.ArrayList;
 
-
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
+public class FavoritesAdapter  extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
     private final ArrayList<Movie> moviesList;
     private Context mContext;
     SharedPreferences prefs;
@@ -44,23 +40,23 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         }
     }
 
-    public MovieAdapter(ArrayList<Movie> movies, Context context) {
+    public FavoritesAdapter(ArrayList<Movie> movies, Context context) {
         this.moviesList = movies;
         this.mContext = context;
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     @Override
-    public MovieAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+    public FavoritesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                       int viewType) {
         View v1 = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.movie_cell, parent, false);
-        return new ViewHolder(v1);
+        return new FavoritesAdapter.ViewHolder(v1);
     }
 
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int p) {
+    public void onBindViewHolder(final FavoritesAdapter.ViewHolder holder, int p) {
         final int position = holder.getAdapterPosition();
         holder.movieLabel.setText(moviesList.get(position).getTitle());
         Picasso.with(holder.movieImage.getContext()).load(moviesList.get(position).getPath())
@@ -71,6 +67,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 Log.d("zaq", moviesList.get(position).getTitle());
                 Intent intent = new Intent(holder.movieLabel.getContext(), MovieActivity.class);
                 intent.putExtra("moviePosition", position);
+                intent.putExtra("isFavorite", true);
                 holder.movieLabel.getContext().startActivity(intent);
             }
         });
