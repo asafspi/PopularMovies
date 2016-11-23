@@ -16,13 +16,7 @@ public class FavoritesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
-        getFavoritesListFromShared();
         setVies();
-
-    }
-
-    private void getFavoritesListFromShared() {
-
     }
 
     private void setVies() {

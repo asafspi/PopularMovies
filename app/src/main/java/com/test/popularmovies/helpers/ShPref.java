@@ -108,6 +108,11 @@ public class ShPref {
         Context ctx = Contextor.getInstance().getContext();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         prefs.edit().remove(key).commit();
+        for(int i=0; i < GetDataForMovies.favorites.size(); i++){
+            if(GetDataForMovies.favorites.get(i).getTitle().contains(key)){
+                GetDataForMovies.favorites.remove(i);
+            }
+        }
     }
 
     public static void saveToFavorites(String title, int position) {
@@ -124,9 +129,11 @@ public class ShPref {
 
     public static boolean checkIfOnFavorites(String title) {
         String json = ShPref.getString(title, "");
-        return !json.equals("");
+        if(json.equals("")){
+            return false;
+        }
+        else return true;
     }
-
 }
 
 

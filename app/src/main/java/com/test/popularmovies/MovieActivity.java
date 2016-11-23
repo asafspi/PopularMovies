@@ -77,8 +77,8 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
             case R.id.favoriteButton:
                 if (ShPref.checkIfOnFavorites(header.getText().toString())) {
                     favorite.setImageResource(R.drawable.ic_star_empty);
-                    ShPref.removeFromFavorites(header.getText().toString(), position);
-                    ShPref.saveToFavorites(header.getText().toString(), position);
+                    ShPref.remove(header.getText().toString());
+                    //ShPref.saveToFavorites(header.getText().toString(), position);
                 } else {
                     ShPref.saveToFavorites(header.getText().toString(), position);
                     favorite.setImageResource(R.drawable.ic_star);
